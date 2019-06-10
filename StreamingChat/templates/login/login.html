@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Iniciar Sesión{% endblock %}
+{% load static %}
+{% block css %}
+	<link rel="stylesheet" type='text/css' href="{% static 'library/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type='text/css' type='text/css' href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type='text/css' href="{% static 'fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type='text/css' href="{% static 'library/animate/animate.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type='text/css' href="{% static 'library/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type='text/css'  href="{% static 'library/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type='text/css' href="{% static 'library/select2/select2.min.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type='text/css' type="text/css" href="{% static 'library/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type='text/css' href="{% static 'css/util.css' %}">
+	<link rel="stylesheet" type='text/css' href="{% static 'css/main.css' %}">
+{% endblock %}
+{% block content %}
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 bg-white text-center col-md-3" style="height: 100vh; padding-top: 20vh;">
+				<form class="login100-form validate-form">
+					<span class="login100-form-title p-b-40">
+						Inicia sesión
+					</span>
+
+					<div>
+						<a href="#" class="btn-login-with bg1 m-b-10">
+							<i class="fa fa-facebook-official"></i>
+							Inicia con facebook
+						</a>
+
+						<a href="#" class="btn-login-with bg2">
+							<i class="fa fa-twitter"></i>
+							Inicia con Twitter
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block js %}
+<!--===============================================================================================-->
+	<script src="{% static 'library/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'library/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'library/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'library/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'library/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'library/daterangepicker/moment.min.js' %}"></script>
+	<script src="library/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'library/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'js/main.js' %}"></script>
+{% endblock %}

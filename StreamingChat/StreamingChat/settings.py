@@ -19,6 +19,7 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
+    'social_django',
     'django_private_chat',
 )
 
@@ -37,6 +38,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'StreamingChat.urls'
@@ -52,6 +54,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -101,6 +105,41 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR.child('static')]
+
+
+# Settings for python social auth
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.open_id.OpenIdAuth',
+    'social_core.backends.google.GoogleOpenId',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.instagram.InstagramOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+SOCIAL_AUTH_LOGIN_URL = 'login'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'home'
+SOCIAL_AUTH_LOGOUT_REDIRECT_URL = 'login'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '654582745012785'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'da1ee441ede16b29e60c3fbbdab28da7'
+
+SOCIAL_AUTH_INSTAGRAM_KEY = 'db5686757c764366a28291b3bf04363f'         
+SOCIAL_AUTH_INSTAGRAM_SECRET = '    99d12232608c4c73b1179c8fe02080f3'  
+SOCIAL_AUTH_INSTAGRAM_EXTRA_DATA = [('user', 'user'),]
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email'] 
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {       
+    'fields': 'id, name, email, link'
+}
+SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [                
+        ('name', 'name'),
+        ('email', 'email'),
+        ('link', 'profile_url'),
+    ]
 
 
 # Settings for the server of django_private_chat

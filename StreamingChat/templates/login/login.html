@@ -31,14 +31,14 @@
 					</span>
 
 					<div>
-						<a href="#" class="btn-login-with bg1 m-b-10">
+						<a href="{% url 'social:begin' 'facebook' %}" class="btn-login-with bg1 m-b-10">
 							<i class="fa fa-facebook-official"></i>
 							Inicia con facebook
 						</a>
 
-						<a href="#" class="btn-login-with bg2">
-							<i class="fa fa-twitter"></i>
-							Inicia con Twitter
+						<a href="{% url 'social:begin' 'instagram' %}" class="btn-login-with bg2">
+							<i class="fa fa-instagram"></i>
+							Inicia con Instagram
 						</a>
 					</div>
 				</form>

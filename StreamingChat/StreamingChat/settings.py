@@ -20,7 +20,6 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
     'social_django',
-    'django_private_chat',
 )
 
 LOCAL_APPS = (
@@ -67,7 +66,7 @@ WSGI_APPLICATION = 'StreamingChat.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'chat',
+        'NAME': 'chat2',
         'USER': 'postgres',
         'PASSWORD': 'pass',
         'HOST': 'localhost',
@@ -119,9 +118,9 @@ AUTHENTICATION_BACKENDS = (
 )
 
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'user_list'
+LOGIN_REDIRECT_URL = ''
 SOCIAL_AUTH_LOGIN_URL = 'login'
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'user_list'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = ''
 SOCIAL_AUTH_LOGOUT_REDIRECT_URL = 'login'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '2194934260560558'
@@ -140,10 +139,3 @@ SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [
         ('email', 'email'),
         ('link', 'profile_url'),
     ]
-
-
-# Settings for the server of django_private_chat
-
-CHAT_WS_SERVER_HOST = 'localhost'
-CHAT_WS_SERVER_PORT = 5002
-CHAT_WS_SERVER_PROTOCOL = 'ws'

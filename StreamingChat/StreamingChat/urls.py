@@ -6,9 +6,9 @@ from django_private_chat import urls as django_private_chat_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    path('', login_views.login, name='login'),
-    path('', login_views.logout, name='logout'),
-    path("home/", login_views.home, name="home"),
+    path('login/', login_views.login, name='login'),
+    #path('', login_views.logout, name='logout'),
+    url(r'^$', login_views.UserListView.as_view(), name='user_list'),
     # python social auth
     path('', include('social_django.urls', namespace='social')),
     # django private chat

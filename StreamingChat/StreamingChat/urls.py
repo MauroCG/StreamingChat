@@ -9,4 +9,6 @@ urlpatterns = [
     path('', login_views.logout, name='logout'),
     # python social auth
     path('', include('social_django.urls', namespace='social')),
+    # chat urls
+    path('chat/', include('chat.urls')),
 ]

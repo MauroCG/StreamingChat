@@ -20,10 +20,12 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
     'social_django',
+    'channels',
 )
 
 LOCAL_APPS = (
     'apps.login',
+    'apps.chat',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -139,3 +141,17 @@ SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [
         ('email', 'email'),
         ('link', 'profile_url'),
     ]
+
+
+# Settings for django channels
+
+ASGI_APPLICATION = 'StreamingChat.routing.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}

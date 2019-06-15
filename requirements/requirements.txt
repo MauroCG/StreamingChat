@@ -25,8 +25,10 @@ psycopg2==2.8.3
 pycparser==2.19
 PyHamcrest==1.9.0
 PyJWT==1.7.1
+pypiwin32==223
 python3-openid==3.1.0
 pytz==2019.1
+pywin32==224
 requests==2.22.0
 requests-oauthlib==1.2.0
 six==1.12.0

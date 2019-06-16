@@ -6,11 +6,46 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 	<title>{% block title %}{% endblock %}</title>
-	{% block css %}{% endblock %}
+	{% block css %}
+		<link rel="stylesheet" type='text/css' href="{% static 'library/bootstrap/css/bootstrap.min.css' %}">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type='text/css' type='text/css' href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type='text/css' href="{% static 'fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type='text/css' href="{% static 'library/animate/animate.css' %}">
+	<!--===============================================================================================-->	
+		<link rel="stylesheet" type='text/css' href="{% static 'library/css-hamburgers/hamburgers.min.css' %}">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type='text/css'  href="{% static 'library/animsition/css/animsition.min.css' %}">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type='text/css' href="{% static 'library/select2/select2.min.css' %}">
+	<!--===============================================================================================-->	
+		<link rel="stylesheet" type='text/css' type="text/css" href="{% static 'library/daterangepicker/daterangepicker.css' %}">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type='text/css' href="{% static 'css/util.css' %}">
+		<link rel="stylesheet" type='text/css' href="{% static 'css/main.css' %}">
+	{% endblock %}
 </head>
 <body>
 	{% block content %}{% endblock %}
-	{% block js %}{% endblock %}
-	{% block extra_js %}{% endblock extra_js %}
+	{% block js %}
+		<!--===============================================================================================-->
+	<script src="{% static 'library/jquery/jquery-3.2.1.min.js' %}"></script>
+	<!--===============================================================================================-->
+		<script src="{% static 'library/animsition/js/animsition.min.js' %}"></script>
+	<!--===============================================================================================-->
+		<script src="{% static 'library/bootstrap/js/popper.js' %}"></script>
+		<script src="{% static 'library/bootstrap/js/bootstrap.min.js' %}"></script>
+	<!--===============================================================================================-->
+		<script src="{% static 'library/select2/select2.min.js' %}"></script>
+	<!--===============================================================================================-->
+		<script src="{% static 'library/daterangepicker/moment.min.js' %}"></script>
+		<script src="library/daterangepicker/daterangepicker.js"></script>
+	<!--===============================================================================================-->
+		<script src="{% static 'library/countdowntime/countdowntime.js' %}"></script>
+	<!--===============================================================================================-->
+		<script src="{% static 'js/main.js' %}"></script>
+	{% endblock %}
 </body>
 </html>

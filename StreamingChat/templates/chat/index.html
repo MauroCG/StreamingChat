@@ -1,17 +1,20 @@
-<!-- chat/templates/chat/index.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Chat Rooms</title>
-</head>
-<body>
+{% extends 'base.html'  %}
+{% block title %}Chat{% endblock %}
+{% block content %}
     What chat room would you like to enter?<br/>
     <input id="room-name-input" type="text" size="100"/><br/>
     <input id="room-name-submit" type="button" value="Enter"/>
-    <a class="btn btn-danger btn-sm" href="{% url 'logout' %}" role="button">
-        Cerrar sesión
-    </a>
+    <button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">cerrar sesión</button>
+
+    <div class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header"><h4>cerrar sesión <i class="fa fa-lock"></i></h4></div>
+          <div class="modal-body"><i class="fa fa-question-circle"></i>Esta seguro que desea cerrar sesión?</div>
+          <div class="modal-footer"><a href="{% url 'logout' %}" class="btn btn-primary btn-block">Salir</a></div>
+        </div>
+      </div>
+    </div>
 
     <script>
         document.querySelector('#room-name-input').focus();
@@ -26,5 +29,4 @@
             window.location.pathname = '/chat/' + roomName + '/';
         };
     </script>
-</body>
-</html>
+{% endblock %}

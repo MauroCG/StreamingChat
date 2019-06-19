@@ -78,10 +78,6 @@ ul, li {
 
 
 /*---------------------------------------------*/
-input {
-	outline: none;
-	border: none;
-}
 
 input[type="number"] {
     -moz-appearance: textfield;
@@ -483,3 +479,6 @@ iframe {
     padding-top: 20px
   }
 }
+
+
+/* Chat styles */

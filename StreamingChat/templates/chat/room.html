@@ -6,7 +6,7 @@
         <textarea id="chat-log" cols="100" rows="20" class="fs-16" readonly></textarea><br/>
         <div class="message-input">
             <div class="wrap">
-                <input id="chat-message-input" type="text" size="100" class="fs-16"placeholder="Escribe un mensaje"/>
+                <input id="chat-message-input" type="text" size="100" class="border rounded-pill" placeholder="Escribe un mensaje"/>
                 <button id="chat-message-submit" class="btn btn-primary fs-16"><i class="fa fa-paper-plane" aria-hidden="true"></i> Enviar</button>
             </div>
         </div>
@@ -15,35 +15,29 @@
 
     <script>
         var roomName = {{ room_name_json }};
-
         var chatSocket = new WebSocket(
             'ws://' + window.location.host +
             '/ws/chat/' + roomName + '/');
-
         chatSocket.onmessage = function(e) {
             var data = JSON.parse(e.data);
             var message = data['message'];
             document.querySelector('#chat-log').value += (message + '\n');
         };
-
         chatSocket.onclose = function(e) {
             console.error('Chat socket closed unexpectedly');
         };
-
         document.querySelector('#chat-message-input').focus();
         document.querySelector('#chat-message-input').onkeyup = function(e) {
             if (e.keyCode === 13) {  // enter, return
                 document.querySelector('#chat-message-submit').click();
             }
         };
-
         document.querySelector('#chat-message-submit').onclick = function(e) {
             var messageInputDom = document.querySelector('#chat-message-input');
             var message = messageInputDom.value;
             chatSocket.send(JSON.stringify({
                 'message': message
             }));
-
             messageInputDom.value = '';
         };
     </script>
@@ -115,13 +109,11 @@
                     </div>
                     <div class="col-sm-6 col-xs-5 dial-buttons">
                         <button id="dial" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-earphone"></span>
+                            <i class="fas fa-phone"></i> Llamar 
                         </button>
-                        <button id="snap" class="btn btn-success">
-                            <span class="glyphicon glyphicon-camera"></span>
-                        </button>
+                        
                         <button id="hangup" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-ban-circle"></span>
+                            <i class="fas fa-phone-slash"></i> Colgar
                         </button>                    
                     </div>
                 </div>
@@ -211,7 +203,7 @@
     function ended(session) {
         clearInterval(thumbnail.ival);
         thumbnail.ival = 0;
-        set_icon('facetime-video');
+        set_icon('video');
         img_out.innerHTML = '';
         sounds.play("{% static 'sound/goodbye' %}");
         console.log("Bye!");
@@ -220,8 +212,8 @@
     // Video Session Ended
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     function set_icon(icon) {
-        video_out.innerHTML = '<span class="glyphicon glyphicon-' +
-            icon + '"></span>';
+        video_out.innerHTML = '<i class="fas fa-' +
+            icon + '"></i>';
     }
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     // Start Phone Call
@@ -234,14 +226,14 @@
         // No Dupelicate Dialing Allowed
         if (!session) return;
         // Show Connecting Status
-        set_icon('send');
+        set_icon('paper-plane');
     }
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     // Ready to Send or Receive Calls
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     phone.ready(function(){
         // Ready To Call
-        set_icon('facetime-video');
+        set_icon('video');
         // Auto Call
         if ('call' in urlargs) {
             var number = urlargs['call'];
@@ -257,20 +249,9 @@
         // Hanup Call
         PUBNUB.bind( 'mousedown,touchstart', PUBNUB.$('hangup'), function() {
             phone.hangup();
-            set_icon('facetime-video');
+            set_icon('video');
         } );
-        // Take Picture
-        PUBNUB.bind( 'mousedown,touchstart', PUBNUB.$('snap'), function() {
-            var photo = phone.snap();
-            if (!(photo && photo.image))
-                return console.error(
-                    '%c Connect your video with a partner first.',
-                    'font-size:30px;background:#f00;color:#fff'
-                );
-            img_self.innerHTML = ' ';
-            img_self.appendChild(photo.image);
-            setTimeout( function() { img_self.innerHTML = ' ' }, 750 );
-        } );
+        
     });
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     // Received Call Thumbnail
@@ -278,7 +259,7 @@
     function thumbnail(session) {
         img_out.innerHTML = '';
         img_out.appendChild(session.image);
-        img_out.appendChild(phone.snap().image);
+        //img_out.appendChild(phone.snap().image);
     }
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     // Receiver for Calls
@@ -337,7 +318,7 @@
     phone.unable(function(details){
         console.log("Alert! - Reload Page.");
         console.log(details);
-        set_icon('remove');
+        set_icon('times');
     });
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     // Debug Output

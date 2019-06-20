@@ -2,11 +2,17 @@
 {% load static %}
 {% block title %}Chat{% endblock %}
 {% block content %}
-    <div class="card p-5 " style="height: 60vh; width: 60vw; padding-top: 20vh;">
-        <textarea id="chat-log" cols="100" rows="20" class="fs-16" readonly></textarea><br/>
+<div class="bg-container p-4">
+    <h3 class="text-center">Sala {{ room_name_json }}</h3>
+    <div class="card p-4 mx-auto chat" style="height: 60vh; width: 60vw; padding-top: 5vh;">
+        
+        <!--<textarea id="chat-log" cols="100" rows="20" class="fs-16" readonly></textarea><br/>-->
+        <div id="chat-log">
+                <div></div>
+                </div>
         <div class="message-input">
             <div class="wrap">
-                <input id="chat-message-input" type="text" size="100" class="border rounded-pill" placeholder="Escribe un mensaje"/>
+                <input id="chat-message-input" type="text" style="width: 40vw" class="border rounded-pill" placeholder="Escribe un mensaje"/> 
                 <button id="chat-message-submit" class="btn btn-primary fs-16"><i class="fa fa-paper-plane" aria-hidden="true"></i> Enviar</button>
             </div>
         </div>
@@ -14,6 +20,7 @@
     
 
     <script>
+        var username = `{{ user.username }}`
         var roomName = {{ room_name_json }};
         var chatSocket = new WebSocket(
             'ws://' + window.location.host +
@@ -21,7 +28,8 @@
         chatSocket.onmessage = function(e) {
             var data = JSON.parse(e.data);
             var message = data['message'];
-            document.querySelector('#chat-log').value += (message + '\n');
+            //document.querySelector('#chat-log').value += (message + '\n');
+            add_message(message['user'], message['text']);
         };
         chatSocket.onclose = function(e) {
             console.error('Chat socket closed unexpectedly');
@@ -36,10 +44,18 @@
             var messageInputDom = document.querySelector('#chat-message-input');
             var message = messageInputDom.value;
             chatSocket.send(JSON.stringify({
-                'message': message
+                'message': {'text': message, 'user': username}
             }));
+            
             messageInputDom.value = '';
         };
+
+        function add_message(user, message) {
+            var chat_out = document.querySelector('#chat-log');
+            var newchat       = document.createElement('div');
+            newchat.innerHTML = `<strong>${user}: </strong> ${message}`
+            chat_out.appendChild( newchat);
+        }
     </script>
 
 
@@ -49,37 +65,52 @@
         <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
     <!-- My Phone Number & Dial Areas -->
     <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
-    <div class="container">
-        <div class="row">
+    <div class="container mx-auto">
+        <div class="row mx-auto">
 
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- MY PHONE NUMBER -->
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
-            <div class="col-sm-6">
+            <div class="col-sm-6 mx-auto">
                 <div id="my-number-section" class="text-center">
-                    <div id="my-number">LOADING</div>
-                    <div id="my-number-title" class="hidden-sm hidden-xs">
-                        this is <strong>your phone number</strong>
-                    </div>
+                    <div id="my-number">Cargando...</div>
+                    
                     <div id="my-number-permalink">
                         <span class="glyphicon glyphicon-link"></span>
-                        call link:
+                        Comparte este link para empezar una videollamada:
                         <a id="my-number-link" href="...">https://...</a>
                     </div>
                 </div>
-                <div id="pubnub-chat-section" class="text-center">
-                    <input id="pubnub-chat-input" type="text" placeholder="chat here">
-                    <div id="pubnub-chat-output"><div></div></div>
-                </div>
             </div>
-
+        </div>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- Video -->
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
-            <div class="col-sm-6">
+
+            <!-- DIAL CONTROLS -->
+                <div class="row mx-auto">
+                    <div class="col-sm-6 col-xs-7 mx-auto">
+                        <div class="form-group"><div class="input-group">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                        <input id="number" class="form-control" type="text" placeholder="Ingrese el nombre del usuario">
+                        </div></div>
+                    </div>
+                    <div class="col-sm-6 col-xs-5 dial-buttons">
+                        <button id="dial" class="btn btn-success">
+                            <i class="fas fa-phone"></i> Llamar 
+                        </button>
+                        
+                        <button id="hangup" class="btn btn-danger">
+                            <i class="fas fa-phone-slash"></i> Colgar
+                        </button>                    
+                    </div>
+                </div>
+
                 <!-- DISPLAY -->
-                <div class="row">
-                    <div class="col-xs-12 text-center">
+                <div class="row ">
+                    <div class="col-sm-6 text-center mx-auto">
                         <div id="video-border">
                             <div class="pubnub-relative">
                                 <div id="video-self"></div>
@@ -90,35 +121,18 @@
                         </div>
                         <div id="pubnub-relative">
                             <div id="video-thumbnail"></div>
-                            <div id="pubnub-logo">
-                                <div id="pubnub-logo-img"></div>
+                        </div>
+                        <div id="pubnub-chat-section" class="text-center">
+                            <h3>Chat privado</h3>
+                            <input id="pubnub-chat-input" type="text" placeholder="Escriba un mensaje">
+                            <div id="pubnub-chat-output">
+                                <div></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- DIAL CONTROLS -->
-                <div class="row">
-                    <div class="col-sm-6 col-xs-7">
-                        <div class="form-group"><div class="input-group">
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-th"></span>
-                        </div>
-                        <input id="number" class="form-control" type="number" placeholder="Type Recipient's #">
-                        </div></div>
-                    </div>
-                    <div class="col-sm-6 col-xs-5 dial-buttons">
-                        <button id="dial" class="btn btn-primary">
-                            <i class="fas fa-phone"></i> Llamar 
-                        </button>
-                        
-                        <button id="hangup" class="btn btn-danger">
-                            <i class="fas fa-phone-slash"></i> Colgar
-                        </button>                    
-                    </div>
-                </div>
-            </div>
-        </div>
+                         
+       
     </div>
 
     <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
@@ -142,15 +156,15 @@
     var my_number       = PUBNUB.$('my-number');
     var my_link         = PUBNUB.$('my-number-link');
     var number          = urlargs.number || Math.floor(Math.random()*999+1);
-    my_number.number    = number;
-    my_number.innerHTML = ''+my_number.number;
-    my_link.href        = location.href.split('?')[0] + '?call=' + number;
+    my_number.number    = username;
+    my_number.innerHTML = ''+ my_number.number;
+    my_link.href        = location.href.split('?')[0] + '?call=' + username;
     my_link.innerHTML   = my_link.href;
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     // Update Location if Not Set
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     if (!('number' in urlargs)) {
-        urlargs.number = my_number.number;
+        urlargs.number = username;
         location.href = urlstring(urlargs);
         return;
     }
@@ -334,5 +348,5 @@
 
 
 
-
+<div>
 {% endblock %}

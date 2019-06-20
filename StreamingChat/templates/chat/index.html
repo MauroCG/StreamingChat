@@ -1,8 +1,8 @@
 {% extends 'base.html'  %}
 {% block title %}Chat{% endblock %}
 {% block content %}
-  <div class="card p-5">
-    <div>
+  <div class="bg-container p-4">
+    <div class="card">
       <div class="card-body">
         <h2 class="card-title">¿A cuál sala te gustaría entrar?</h2><br/>
         <input id="room-name-input" class="fs-16" type="text" size="100" placeholder="Escribe una sala" class="input100"/><br/><br/>
@@ -10,7 +10,7 @@
         <button id="room-name-submit" class="btn btn-primary fs-16">Entrar</button>
       </div>
     </div>
-  </div>
+  
     
     <div class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-sm">
@@ -35,4 +35,5 @@
             window.location.pathname = '/chat/' + roomName + '/';
         };
     </script>
+  </div>
 {% endblock %}

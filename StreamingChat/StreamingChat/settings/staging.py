@@ -1,10 +1,10 @@
 from unipath import Path
 
-BASE_DIR = Path(__file__).ancestor(2)
+BASE_DIR = Path(__file__).ancestor(3)
 
 SECRET_KEY = 'bkkh0h7&c()lx#cqvo4nq+=@^$xwjehl#bs(2bb^@8qd3sbd3@'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -68,11 +68,11 @@ WSGI_APPLICATION = 'StreamingChat.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'chat2',
-        'USER': 'postgres',
-        'PASSWORD': 'pass',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': 'd71vdnngn20pho',
+        'USER': 'nttpkmenbxxugc',
+        'PASSWORD': '58015fec53e34cf89f7797f903dadcc23601143a60c9924f5b373948a60e391f',
+        'HOST': 'ec2-23-21-156-171.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -106,6 +106,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR.child('static')]
+STATIC_ROOT = 'staticfiles'
 
 
 # Settings for python social auth

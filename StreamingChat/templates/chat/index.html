@@ -1,17 +1,26 @@
-<!-- chat/templates/chat/index.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Chat Rooms</title>
-</head>
-<body>
-    What chat room would you like to enter?<br/>
-    <input id="room-name-input" type="text" size="100"/><br/>
-    <input id="room-name-submit" type="button" value="Enter"/>
-    <a class="btn btn-danger btn-sm" href="{% url 'logout' %}" role="button">
-        Cerrar sesión
-    </a>
+{% extends 'base.html'  %}
+{% block title %}Chat{% endblock %}
+{% block content %}
+  <div class="bg-container p-4">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">¿A cuál sala te gustaría entrar?</h2><br/>
+        <input id="room-name-input" class="fs-16" type="text" size="100" placeholder="Escribe una sala" class="input100"/><br/><br/>
+        <button class="btn btn-danger fs-16" data-toggle="modal" data-target=".bs-example-modal-sm">Cerrar sesión</button>
+        <button id="room-name-submit" class="btn btn-primary fs-16">Entrar</button>
+      </div>
+    </div>
+  
+    
+    <div class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header"><h4>Cerrar sesión <i class="fa fa-lock"></i></h4></div>
+          <div class="modal-body"><i class="fa fa-question-circle"></i>¿Está seguro que desea cerrar sesión?</div>
+          <div class="modal-footer"><a href="{% url 'logout' %}" class="btn btn-primary btn-block">Salir</a></div>
+        </div>
+      </div>
+    </div>
 
     <script>
         document.querySelector('#room-name-input').focus();
@@ -26,5 +35,5 @@
             window.location.pathname = '/chat/' + roomName + '/';
         };
     </script>
-</body>
-</html>
+  </div>
+{% endblock %}

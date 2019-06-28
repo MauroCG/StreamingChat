@@ -1,0 +1,13 @@
+.bg-container {
+    background-color: #98c0fc96;
+}
+
+.bg-container > div {
+width: 90%;
+min-width: 300px;
+}
+
+.chat {
+    flex-direction: column;
+    justify-content: flex-end;
+}

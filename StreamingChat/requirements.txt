@@ -1,5 +1,3 @@
-aioredis==1.2.0
-asgiref==3.1.2
 asn1crypto==0.24.0
 async-timeout==3.0.1
 attrs==19.1.0
@@ -7,19 +5,15 @@ autobahn==19.6.2
 Automat==0.7.0
 certifi==2019.3.9
 cffi==1.12.3
-channels==2.2.0
-channels-redis==2.4.0
 chardet==3.0.4
 constantly==15.1.0
 cryptography==2.7
-daphne==2.3.0
 defusedxml==0.6.0
 dj-database-url==0.5.0
 dj-static==0.0.6
 Django==2.2.2
 django-toolbelt==0.0.1
 gunicorn==19.9.0
-hiredis==1.0.0
 hyperlink==19.0.0
 idna==2.8
 incremental==17.5.0
@@ -38,7 +32,6 @@ social-auth-app-django==3.1.0
 social-auth-core==3.2.0
 sqlparse==0.3.0
 static3==0.7.0
-Twisted==19.2.1
 txaio==18.8.1
 Unipath==1.1
 urllib3==1.25.3

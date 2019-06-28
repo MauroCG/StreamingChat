@@ -4,7 +4,7 @@ BASE_DIR = Path(__file__).ancestor(3)
 
 SECRET_KEY = 'bkkh0h7&c()lx#cqvo4nq+=@^$xwjehl#bs(2bb^@8qd3sbd3@'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -20,7 +20,6 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
     'social_django',
-    'channels',
 )
 
 LOCAL_APPS = (
@@ -129,8 +128,8 @@ SOCIAL_AUTH_LOGOUT_REDIRECT_URL = 'login'
 SOCIAL_AUTH_FACEBOOK_KEY = '2194934260560558'
 SOCIAL_AUTH_FACEBOOK_SECRET = '212212a484931ec18cc44e67962d3689'
 
-SOCIAL_AUTH_INSTAGRAM_KEY = '5cbd01b8301146a087484e14bc2b9194'         
-SOCIAL_AUTH_INSTAGRAM_SECRET = '6cae1efa724e48e08c8252081102cd9c ' 
+SOCIAL_AUTH_INSTAGRAM_KEY = 'db5686757c764366a28291b3bf04363f'         
+SOCIAL_AUTH_INSTAGRAM_SECRET = 'd4b11ff6321245ec9582a83e455cbb15' 
 SOCIAL_AUTH_INSTAGRAM_EXTRA_DATA = [('user', 'user'),]
 
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email'] 
@@ -142,17 +141,3 @@ SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [
         ('email', 'email'),
         ('link', 'profile_url'),
     ]
-
-
-# Settings for django channels
-
-ASGI_APPLICATION = 'StreamingChat.routing.application'
-
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
-        },
-    },
-}

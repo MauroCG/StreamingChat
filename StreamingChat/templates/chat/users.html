@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container-fluid">
+        <div>
+            <div class="card p-5">
+                <h3 class="text-center">Usuarios disponibles: </h3>
+                <div class="container">
+                    {% for user in object_list %}
+                        {% if user != request.user %}
+                            <p>{{ user.get_full_name }}</p>
+                            <a href="" class="btn btn-primary">
+                                Chatear con {{ user.username }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

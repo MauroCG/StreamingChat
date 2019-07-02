@@ -14,7 +14,7 @@ class UserListView(LoginRequiredMixin, generic.ListView):
     slug_field = 'username'
     slug_url_kwarg = 'username'
     template_name = 'chat/users.html'
-    login_url = 'admin/'
+    login_url = 'login/'
 
 
     def get_queryset(self):

@@ -4,18 +4,21 @@
 {% block content %}
 <div class="bg-container p-4">
     <div>
+        <div class="card p-4">
+            <h3 class="text-center">Usuarios disponibles</h3>
+            <div class="container">
+                {% for user in object_list %}
+                    {% if user != request.user %}
+                        <p>{{ user.get_full_name }}</p>
+                        <a href="#" class="btn btn-primary">
+                            {{ user.username }}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
         <a class="btn btn-danger btn-sm" href="{% url 'logout' %}" role="button" > Cerrar sesión </a>
     </div>
-    <h3 class="text-center">Sala {{ room_name_json }}</h3>    
-
-    <script>
-        var username = `{{ user.username }}`
-        var roomName = {{ room_name_json }};
-        var chatSocket = new WebSocket(
-            'ws://' + window.location.host +
-            '/ws/chat/' + roomName + '/');
-    </script>
-
 
         <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
     <!-- My Phone Number & Dial Areas -->
@@ -107,6 +110,7 @@
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     // Generate Random Number if Needed
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+    var username = '{{ user.username }}';
     var urlargs         = urlparams();
     var my_number       = PUBNUB.$('my-number');
     var my_link         = PUBNUB.$('my-number-link');
@@ -296,6 +300,4 @@
         if (JSON.stringify(details).indexOf('FAIL') > 0) console.log(details);
     });
     })();</script>
-
-<div>
 {% endblock %}
